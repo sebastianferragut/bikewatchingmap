@@ -109,7 +109,7 @@ map.on('load', () => {
                 // Add <title> for browser tooltips
                 d3.select(this)
                     .append('title')
-                    .text(`${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
+                    .html(`Station: ${d.name} WITH TRAFFIC DATA: ${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
             });
 
         
@@ -134,7 +134,44 @@ map.on('load', () => {
         map.on('resize', updatePositions);
         map.on('moveend', updatePositions);
 
+         
+        let timeFilter = -1;  // Default: No filtering applied
+
+        const timeSlider = document.getElementById('time-filter');
+        const selectedTime = document.getElementById('selected-time');
+        const anyTimeLabel = document.getElementById('any-time');
+
+        // Helper function to format time in HH:MM AM/PM format
+        function formatTime(minutes) {
+            const date = new Date(0, 0, 0, 0, minutes);  // Set hours & minutes
+            return date.toLocaleString('en-US', { timeStyle: 'short' }); // Format as HH:MM AM/PM
+        }
+
+        // Update the time display based on the slider value
+        function formatTime(minutes) {
+            const date = new Date(0, 0, 0, 0, minutes);  // Set hours & minutes
+            return date.toLocaleString('en-US', { timeStyle: 'short' }); // Format as HH:MM AM/PM
+        }
         
+        function updateTimeDisplay() {
+            timeFilter = Number(timeSlider.value);  // Get slider value
+        
+            if (timeFilter === -1 || timeFilter === 1440) {
+                selectedTime.textContent = "11:59 PM";  // Set to 11:59 PM when slider is at -1
+
+            } else {
+                selectedTime.textContent = formatTime(timeFilter);  // Display formatted time
+            }
+        }
+        
+        // Add the event listener for the slider input
+        timeSlider.addEventListener('input', updateTimeDisplay);
+        
+        // Initialize display when the page loads
+        updateTimeDisplay();
+ 
+
+
         }).catch(error => {
             console.error('Error loading CSV:', error);  // Handle errors
         });

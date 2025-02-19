@@ -4,8 +4,37 @@ html, body {
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
+    justify-content: left; /* Center horizontally */
+    align-items: left;     /* Center vertically */
+}
+
+header {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    display: flex;
+    justify-content: right; /* Center horizontally */
+    align-items: right;     /* Center vertically */
+}
+
+#slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align the elements to the right */
+    margin-left: auto; /* Push the container to the right */
+    width: 200px; /* Optional: set a fixed width for the container */
+}
+
+input[type="range"] {
+    width: 100%; /* Make the slider take up the full width of the container */
+}
+
+em {
+    text-align: right; /* Right align the (any time) text */
+}
+
+time {
+    text-align: right; /* Right align the time text */
 }
      
 #map {
