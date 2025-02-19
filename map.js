@@ -46,7 +46,7 @@ map.on('load', () => {
         type: 'line',
         source: 'cambridge_route',
         paint: {
-          'line-color': '#FFA500', // Orange bike lanes
+          'line-color': '#32D400', // Green bike lanes
           'line-width': 3,       // Line thickness
           'line-opacity': 0.5    // Transparency
         }
