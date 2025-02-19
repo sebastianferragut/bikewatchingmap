@@ -19,7 +19,7 @@ map.on('load', () => {
     // Add bike lane data source
     map.addSource('boston_route', {
       type: 'geojson',
-      data: 'bikewatchingmap/Existing_Bike_Network_2022.geojson' // Local file path
+      data: 'Existing_Bike_Network_2022.geojson' // Local file path
     });
   
     // Add bike lanes layer
@@ -29,8 +29,8 @@ map.on('load', () => {
       source: 'boston_route',
       paint: {
         'line-color': '#32D400', // Green bike lanes
-        'line-width': 5,       // Line thickness
-        'line-opacity': 0.6    // Transparency
+        'line-width': 3,       // Line thickness
+        'line-opacity': 0.5    // Transparency
       }
     });
 });
