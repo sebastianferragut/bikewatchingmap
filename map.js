@@ -104,7 +104,14 @@ map.on('load', () => {
             .attr('fill', 'steelblue')                      // Fill color
             .attr('stroke', 'white')                        // Border color
             .attr('stroke-width', 1)                        // Border thickness
-            .attr('opacity', 0.8);                          // Transparency
+            .attr('opacity', 0.8)                           // Transparency
+            .each(function(d) {
+                // Add <title> for browser tooltips
+                d3.select(this)
+                    .append('title')
+                    .text(`${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
+            });
+
         
         svg.selectAll('circle').each(function() {
             console.log(d3.select(this).attr('r')); // Log the radius for each circle
