@@ -24,7 +24,7 @@ map.on('load', () => {
   
     // Add bike lanes layer
     map.addLayer({
-      id: 'bike-lanes',
+      id: 'b-bike-lanes',
       type: 'line',
       source: 'boston_route',
       paint: {
@@ -32,5 +32,23 @@ map.on('load', () => {
         'line-width': 3,       // Line thickness
         'line-opacity': 0.5    // Transparency
       }
+    });
+
+    // Add bike lane data source
+    map.addSource('cambridge_route', {
+        type: 'geojson',
+        data: 'RECREATION_BikeFacilities.geojson' // Local file path
+      });
+    
+      // Add bike lanes layer
+      map.addLayer({
+        id: 'c-bike-lanes',
+        type: 'line',
+        source: 'cambridge_route',
+        paint: {
+          'line-color': '#FFA500', // Green bike lanes
+          'line-width': 3,       // Line thickness
+          'line-opacity': 0.8    // Transparency
+        }
     });
 });
