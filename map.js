@@ -14,3 +14,23 @@ const map = new mapboxgl.Map({
     maxZoom: 18 // Maximum allowed zoom
 });
 
+// Wait for the map to load before adding data
+map.on('load', () => {
+    // Add bike lane data source
+    map.addSource('boston_route', {
+      type: 'geojson',
+      data: 'bikewatchingmap/Existing_Bike_Network_2022.geojson' // Local file path
+    });
+  
+    // Add bike lanes layer
+    map.addLayer({
+      id: 'bike-lanes',
+      type: 'line',
+      source: 'boston_route',
+      paint: {
+        'line-color': '#32D400', // Green bike lanes
+        'line-width': 5,       // Line thickness
+        'line-opacity': 0.6    // Transparency
+      }
+    });
+});
