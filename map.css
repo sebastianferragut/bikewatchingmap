@@ -45,6 +45,7 @@ time {
     height: 100%;   /* Adjust height to your desired size */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for effect */
     border-radius: 8px; /* Optional: rounded corners */
+    margin-bottom: 2px;
 }
 
 #map svg {
@@ -60,4 +61,48 @@ time {
     fill-opacity: 0.6;
     stroke: white;
     pointer-events: auto;
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
+    fill: var(--color);
+}
+
+/* Style the legend container */
+.legend {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-block: 10px; 
+}
+
+/* Style individual legend blocks */
+.legend > div {
+    flex: 1;
+    padding: 10px 0; /* More horizontal padding for a blocky look */
+    text-align: center;
+    font-weight: bold;
+    color: white; /* Ensure good contrast */
+    background-color: var(--color); /* Apply the computed color */
+    border: 1px solid #ccc;
+    gap: 1px; /* Prevent touching between colors */
+}
+
+.legend > div:nth-child(1) {
+    background-color: steelblue;
+    text-align: left;
+    padding-left: 0.5cm;
+}
+
+.legend > div:nth-child(2) {
+    background-color: color-mix(in oklch, steelblue 50%, darkorange 50%);
+}
+
+.legend > div:nth-child(3) {
+    background-color: darkorange;
+    text-align: right;
+    padding-right: 0.5cm;
 }

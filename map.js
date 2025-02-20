@@ -23,6 +23,10 @@ let filteredStations = [];
 let trips = [];
 let timeFilter = -1;  // Default: No filtering applied
 
+// Color scheme for traffic flow
+let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
+
+
 // Helper function to convert lat/lon to pixel coordinates
 function getCoords(station) {
     const point = new mapboxgl.LngLat(+station.lon, +station.lat); // Convert lon/lat
@@ -158,6 +162,7 @@ map.on('load', () => {
             .attr('stroke', 'white')                        // Border color
             .attr('stroke-width', 1)                        // Border thickness
             .attr('opacity', 0.8)                           // Transparency
+            .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic)) 
             .each(function(d) {
                 // Add <title> for browser tooltips
                 d3.select(this)
@@ -219,6 +224,8 @@ map.on('load', () => {
             // Update the circles' radii based on the filtered data
             circles.data(timeFilter === -1 ? stations : filteredStations)
                 .attr('r', d => radiusScale(d.totalTraffic));
+            circles.data(timeFilter === -1 ? stations : filteredStations)
+                .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic)) 
         }
           
 
